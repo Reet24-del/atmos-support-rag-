@@ -495,3 +495,83 @@ body {
     height: 18px;
     fill: currentColor;
 }
+
+/* ==========================================================================
+   Responsive Mobile Adjustments (reactive layout for iPhones & Androids)
+   ========================================================================== */
+@media (max-width: 768px) {
+    #app-container {
+        flex-direction: column !important;
+    }
+    
+    #sidebar {
+        display: none !important; /* Hide sidebar on mobile to prioritize the chat feed */
+    }
+    
+    #chat-area {
+        width: 100vw !important;
+        height: 100vh !important;
+    }
+    
+    #chat-header {
+        padding: 0.75rem 1.25rem !important;
+        height: 60px !important;
+    }
+    
+    .chat-avatar {
+        width: 32px !important;
+        height: 32px !important;
+        font-size: 0.95rem !important;
+    }
+    
+    .chat-header-text h2 {
+        font-size: 0.88rem !important;
+    }
+    
+    #quick-replies-container {
+        padding: 0.6rem 1.25rem !important;
+        gap: 6px !important;
+    }
+    
+    .quick-reply-pill {
+        padding: 0.35rem 0.85rem !important;
+        font-size: 0.76rem !important;
+    }
+    
+    #message-feed {
+        padding: 1.25rem 1rem !important;
+        gap: 0.85rem !important;
+    }
+    
+    .message-bubble {
+        max-width: 85% !important; /* Give bubbles more space on narrow screens */
+        font-size: 0.88rem !important;
+        padding: 0.75rem 1rem !important;
+    }
+    
+    #input-panel {
+        padding: 0.75rem 1rem !important;
+        height: 60px !important;
+        background-color: #ffffff !important;
+    }
+    
+    #chat-form {
+        gap: 8px !important;
+    }
+    
+    #user-input {
+        padding: 0.5rem 1rem !important;
+        font-size: 0.88rem !important;
+        border-radius: 20px !important;
+    }
+    
+    #send-btn {
+        width: 36px !important;
+        height: 36px !important;
+    }
+    
+    #send-btn svg {
+        width: 15px !important;
+        height: 15px !important;
+    }
+}
