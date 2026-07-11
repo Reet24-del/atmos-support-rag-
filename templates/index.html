@@ -1,0 +1,118 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Atmos Support Centre</title>
+    <link rel="stylesheet" href="/static/style.css">
+    <!-- Icon font -->
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.0.0/css/all.min.css">
+</head>
+<body>
+    <div id="app-container">
+        <!-- Dashboard Sidebar -->
+        <aside id="sidebar">
+            <div id="sidebar-header">
+                <h1>atmos<span>.support</span></h1>
+                <p>Knowledge Base & RAG Assistant</p>
+            </div>
+            
+            <div id="sidebar-content">
+                <div class="sidebar-title">Explore Resources</div>
+                
+                <!-- Expansion card 1 -->
+                <div class="faq-card">
+                    <div class="faq-card-title">
+                        <span>🚚 Shipping rates & info</span>
+                        <i class="fa-solid fa-chevron-down"></i>
+                    </div>
+                    <div class="faq-card-content">
+                        Standard flat-rate shipping is $4.99 (5-7 business days). Express shipping is available for $14.99 (2-3 business days). We offer free standard shipping on orders over $50. Currently, we ship only to the United States and Canada; international shipping to locations like India is unavailable.
+                    </div>
+                </div>
+
+                <!-- Expansion card 2 -->
+                <div class="faq-card">
+                    <div class="faq-card-title">
+                        <span>💳 Compare Service Tiers</span>
+                        <i class="fa-solid fa-chevron-down"></i>
+                    </div>
+                    <div class="faq-card-content">
+                        <strong>Standard Tier</strong>: Access standard shipping rates, online self-service support. <br>
+                        <strong>Premium Tier</strong>: Priority support with < 2 hour response window, 10% discount on shipping. <br>
+                        <strong>Enterprise Tier</strong>: Dedicated support agent, custom integration options, negotiated rates.
+                    </div>
+                </div>
+
+                <!-- Expansion card 3 -->
+                <div class="faq-card">
+                    <div class="faq-card-title">
+                        <span>📦 Returns & Shipping Fees</span>
+                        <i class="fa-solid fa-chevron-down"></i>
+                    </div>
+                    <div class="faq-card-content">
+                        Returns are accepted within 30 days of purchase in original condition. Return shipping fees are the customer's responsibility unless the item is defective or incorrect. We charge a flat $5.99 return processing fee.
+                    </div>
+                </div>
+
+                <!-- Expansion card 4 -->
+                <div class="faq-card">
+                    <div class="faq-card-title">
+                        <span>🕒 Business Hours & Phone</span>
+                        <i class="fa-solid fa-chevron-down"></i>
+                    </div>
+                    <div class="faq-card-content">
+                        Our customer support phone line (1-800-555-0199) is open Monday through Friday, 9:00 AM to 5:00 PM EST. Online chat support is available 24/7.
+                    </div>
+                </div>
+            </div>
+
+            <!-- Clear Chat Button -->
+            <button id="clear-chat-btn">
+                <i class="fa-solid fa-trash-can"></i> Clear Chat History
+            </button>
+        </aside>
+
+        <!-- Main Chat Area -->
+        <main id="chat-area">
+            <!-- Header -->
+            <header id="chat-header">
+                <div class="chat-header-info">
+                    <div class="chat-avatar">🔮</div>
+                    <div class="chat-header-text">
+                        <h2>Atmos Support Assistant</h2>
+                        <p>Online</p>
+                    </div>
+                </div>
+            </header>
+
+            <!-- Quick Action Reply Board -->
+            <div id="quick-replies-container">
+                <div class="quick-reply-pill" data-query="Do you ship to India? How much does it cost?">🚚 Shipping to India</div>
+                <div class="quick-reply-pill" data-query="What are the service tiers at Atmos?">💳 Compare Tiers</div>
+                <div class="quick-reply-pill" data-query="How do I make a return and what are the return fees?">📦 Return Process</div>
+                <div class="quick-reply-pill" data-query="What are your business hours and support phone number?">🕒 Hours & Phone</div>
+            </div>
+
+            <!-- Message Feed -->
+            <section id="message-feed">
+                <!-- Message bubbles are injected dynamically here -->
+            </section>
+
+            <!-- Input area -->
+            <section id="input-panel">
+                <form id="chat-form">
+                    <input type="text" id="user-input" placeholder="Type your question here..." autocomplete="off" required>
+                    <button type="submit" id="send-btn">
+                        <svg viewBox="0 0 24 24">
+                            <path d="M2.01 21L23 12 2.01 3 2 10l15 2-15 2z"></path>
+                        </svg>
+                    </button>
+                </form>
+            </section>
+        </main>
+    </div>
+    <script src="https://cdn.jsdelivr.net/npm/marked/marked.min.js"></script>
+    <script src="/static/script.js"></script>
+</body>
+</html>

@@ -1,0 +1,51 @@
+### About Atmos
+Atmos is a leading fictional provider of premium smart-home hardware and software solutions. Our mission is to seamlessly connect your life with cutting-edge technology. Atmos is headquartered at 100 Innovation Way, Suite 400, Boston, MA 02110.
+
+### Business Hours & Contact Information
+* **General Office Hours**: Monday through Friday, 9:00 AM to 6:00 PM Eastern Standard Time (EST).
+* **Technical Support Chat**: Available 24/7/365 through our website and mobile application.
+* **Customer Support Phone Line**: Monday through Friday, 8:00 AM to 8:00 PM EST at 1-800-555-ATMOS.
+* **Holiday Schedule**: Our offices are closed on New Year's Day, Memorial Day, Independence Day, Labor Day, Thanksgiving Day, and Christmas Day. Support chat remains open on holidays, but response times may be slightly longer.
+
+### Service Tiers
+Atmos offers three distinct customer service tiers to fit different needs:
+1. **Basic Tier**:
+   * Cost: Free (included with any Atmos hardware purchase).
+   * Shipping: Standard shipping only.
+   * Support Channels: Email support only.
+   * Response Time: Within 24-48 business hours.
+2. **Premium Tier**:
+   * Cost: $19.99 per month.
+   * Shipping: Free 2-day express shipping on all orders.
+   * Support Channels: Priority email, 24/7 web chat support, and access to the VIP community forum.
+   * Response Time: Within 4 hours.
+3. **Enterprise Tier**:
+   * Cost: Custom pricing starting at $499 per month.
+   * Shipping: Free next-day delivery on all equipment, custom logistics handling.
+   * Support Channels: Dedicated Customer Success Manager, 24/7/365 direct phone line, and custom hardware engineering consultations.
+   * Response Time: Instant or under 15 minutes guaranteed.
+
+### Shipping Policies - Domestic Shipping
+* **Coverage**: We ship to all 50 US states, as well as Puerto Rico and US Virgin Islands.
+* **Shipping Methods & Speeds**:
+  * Standard Shipping: 3-5 business days. Free for orders over $50; otherwise, a $5.99 flat rate.
+  * Express Shipping: 2 business days. Free for Premium tier members; $12.99 for Basic tier members.
+  * Next-Day Delivery: 1 business day. Free for Enterprise tier members; $24.99 for all other customers.
+* **Processing Time**: Orders placed before 2:00 PM EST on business days are processed and shipped the same day. Orders placed after 2:00 PM EST or on weekends are shipped the next business day.
+
+### Shipping Policies - International Shipping
+* **Coverage**: Atmos ships internationally to select countries including India, Canada, the United Kingdom (UK), and members of the European Union (EU).
+* **International Shipping Rates & Delivery Times**:
+  * **Canada**: Flat rate of $15 USD. Delivery typically takes 5 to 7 business days.
+  * **India**: Flat rate of $25 USD. Delivery typically takes 7 to 10 business days.
+  * **United Kingdom (UK)**: Flat rate of $20 USD. Delivery typically takes 6 to 8 business days.
+  * **European Union (EU)**: Flat rate of $22 USD. Delivery typically takes 6 to 8 business days.
+* **Customs, Duties & Taxes**: International orders may be subject to local import duties, taxes, and customs fees. These charges are the sole responsibility of the customer and are collected at the time of delivery by the shipping carrier. Atmos does not pre-calculate or collect these fees.
+
+### Return and Refund Processes
+* **Return Window**: Customers can initiate a return for any hardware purchase within 30 days from the date of delivery.
+* **Return Conditions**: Items must be returned in their original packaging, including all accessories, manuals, and in like-new, undamaged condition.
+* **Return Fees**:
+  * **Basic Tier**: A return shipping label fee of $4.99 USD is deducted from the final refund amount.
+  * **Premium & Enterprise Tiers**: Return shipping labels are completely free of charge.
+* **Refund Timeline**: Once the returned hardware is received and inspected at our warehouse, refunds are processed back to the original payment method within 5 to 7 business days. You will receive an automated email confirmation once the refund has been initiated.

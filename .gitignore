@@ -1,0 +1,22 @@
+# Python
+__pycache__/
+*.py[cod]
+*$py.class
+.venv/
+env/
+venv/
+.env
+
+# Streamlit secrets (contains API keys)
+.streamlit/
+secrets.toml
+
+# Vector Store local cache
+faiss_index/
+
+# Development scratch files (contain API keys/scraps)
+test_gemini.py
+list_models.py
+test_groq.py
+test_custom_embed.py
+test_local_faiss.py
