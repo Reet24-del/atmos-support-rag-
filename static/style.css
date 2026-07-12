@@ -496,26 +496,94 @@ body {
     fill: currentColor;
 }
 
+/* Desktop Defaults: Hide mobile toggle elements and overlay */
+.mobile-only-btn {
+    display: none !important;
+}
+
+#sidebar-overlay {
+    display: none;
+    position: fixed;
+    top: 0;
+    left: 0;
+    width: 100vw;
+    height: 100vh;
+    background: rgba(0, 0, 0, 0.4);
+    z-index: 9998;
+}
+
+#sidebar-overlay.active {
+    display: block;
+}
+
 /* ==========================================================================
    Responsive Mobile Adjustments (reactive layout for iPhones & Androids)
    ========================================================================== */
 @media (max-width: 768px) {
-    #app-container {
-        flex-direction: column !important;
+    body {
+        height: 100dvh !important;
+        max-height: 100dvh !important;
+        overflow: hidden !important;
     }
     
+    #app-container {
+        flex-direction: column !important;
+        height: 100dvh !important;
+        max-height: 100dvh !important;
+        width: 100vw !important;
+    }
+    
+    /* Show mobile-only buttons */
+    .mobile-only-btn {
+        display: flex !important;
+        align-items: center;
+        justify-content: center;
+        background: transparent;
+        border: none;
+        color: #db2777;
+        font-size: 1.3rem;
+        cursor: pointer;
+        padding: 0 0.5rem;
+    }
+    
+    /* Convert Sidebar into a Slide-in Drawer on Mobile */
     #sidebar {
-        display: none !important; /* Hide sidebar on mobile to prioritize the chat feed */
+        display: flex !important;
+        position: fixed !important;
+        top: 0 !important;
+        left: -290px !important; /* Hide off-screen left */
+        width: 280px !important;
+        height: 100dvh !important;
+        max-height: 100dvh !important;
+        z-index: 9999 !important;
+        background-color: #fff0f3 !important;
+        border-right: 1px solid #fce7f3 !important;
+        transition: left 0.3s cubic-bezier(0.4, 0, 0.2, 1) !important;
+        box-shadow: 5px 0 25px rgba(244, 63, 94, 0.12) !important;
+    }
+    
+    /* Slide-in class triggers when active */
+    #sidebar.open {
+        left: 0 !important;
     }
     
     #chat-area {
         width: 100vw !important;
-        height: 100vh !important;
+        height: 100dvh !important;
+        max-height: 100dvh !important;
     }
     
     #chat-header {
-        padding: 0.75rem 1.25rem !important;
+        padding: 0.75rem 1rem !important;
         height: 60px !important;
+        justify-content: flex-start !important;
+    }
+    
+    .chat-header-info {
+        display: flex !important;
+        align-items: center !important;
+        gap: 8px !important;
+        width: 100% !important;
     }
     
     .chat-avatar {
@@ -529,7 +597,7 @@ body {
     }
     
     #quick-replies-container {
-        padding: 0.6rem 1.25rem !important;
+        padding: 0.6rem 1rem !important;
         gap: 6px !important;
     }
     
@@ -539,18 +607,19 @@ body {
     }
     
     #message-feed {
-        padding: 1.25rem 1rem !important;
+        padding: 1rem 0.75rem !important;
         gap: 0.85rem !important;
+        height: calc(100% - 180px) !important; /* Force space for header, pills, and input panels */
     }
     
     .message-bubble {
-        max-width: 85% !important; /* Give bubbles more space on narrow screens */
+        max-width: 85% !important;
         font-size: 0.88rem !important;
         padding: 0.75rem 1rem !important;
     }
     
     #input-panel {
-        padding: 0.75rem 1rem !important;
+        padding: 0.5rem 0.75rem !important;
         height: 60px !important;
         background-color: #ffffff !important;
     }

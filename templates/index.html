@@ -12,9 +12,12 @@
     <div id="app-container">
         <!-- Dashboard Sidebar -->
         <aside id="sidebar">
-            <div id="sidebar-header">
+            <div id="sidebar-header" style="position: relative;">
                 <h1>atmos<span>.support</span></h1>
                 <p>Knowledge Base & RAG Assistant</p>
+                <button id="sidebar-close-btn" class="mobile-only-btn" type="button" style="position: absolute; right: 1.25rem; top: 1.5rem; color: #ffffff;">
+                    <i class="fa-solid fa-xmark"></i>
+                </button>
             </div>
             
             <div id="sidebar-content">
@@ -78,6 +81,9 @@
             <!-- Header -->
             <header id="chat-header">
                 <div class="chat-header-info">
+                    <button id="sidebar-toggle-btn" class="mobile-only-btn" type="button">
+                        <i class="fa-solid fa-bars"></i>
+                    </button>
                     <div class="chat-avatar">🔮</div>
                     <div class="chat-header-text">
                         <h2>Atmos Support Assistant</h2>
@@ -112,6 +118,7 @@
             </section>
         </main>
     </div>
+    <div id="sidebar-overlay"></div>
     <script src="https://cdn.jsdelivr.net/npm/marked/marked.min.js"></script>
     <script src="/static/script.js"></script>
 </body>

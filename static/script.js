@@ -6,6 +6,35 @@ document.addEventListener("DOMContentLoaded", () => {
     const quickReplyPills = document.querySelectorAll(".quick-reply-pill");
     const faqCards = document.querySelectorAll(".faq-card");
 
+    // Sidebar Mobile Drawer Elements
+    const toggleBtn = document.getElementById("sidebar-toggle-btn");
+    const closeBtn = document.getElementById("sidebar-close-btn");
+    const sidebar = document.getElementById("sidebar");
+    const overlay = document.getElementById("sidebar-overlay");
+
+    // Open Mobile Sidebar Drawer
+    if (toggleBtn) {
+        toggleBtn.addEventListener("click", () => {
+            sidebar.classList.add("open");
+            overlay.classList.add("active");
+        });
+    }
+
+    // Close Mobile Sidebar Drawer
+    if (closeBtn) {
+        closeBtn.addEventListener("click", () => {
+            sidebar.classList.remove("open");
+            overlay.classList.remove("active");
+        });
+    }
+
+    if (overlay) {
+        overlay.addEventListener("click", () => {
+            sidebar.classList.remove("open");
+            overlay.classList.remove("active");
+        });
+    }
+
     // Clear chat history
     clearChatBtn.addEventListener("click", async () => {
         if (confirm("Are you sure you want to clear the chat history?")) {
