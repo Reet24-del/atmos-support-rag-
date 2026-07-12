@@ -147,7 +147,15 @@ def generate_mock_response(query, chat_history, retrieved_docs):
             f"If you need further assistance, please reach out to customer support at 1-800-555-ATMOS."
         )
         
-    return ans, citations
+    # Only keep citations that are explicitly referenced in the response
+    actual_citations = []
+    ans_lower = ans.lower()
+    for cit in citations:
+        sec_name = cit["section"].lower()
+        if f"[{sec_name}]" in ans_lower or sec_name in ans_lower:
+            actual_citations.append(cit)
+            
+    return ans, actual_citations
 
 # Custom Embeddings
 class SimpleLocalEmbeddings(Embeddings):
@@ -265,7 +273,17 @@ Provided Context Sections:
     )
     
     response = llm.invoke(messages)
-    return response.content, citations
+    
+    # Only keep citations that are explicitly referenced in the response
+    actual_citations = []
+    response_text = response.content
+    response_lower = response_text.lower()
+    for cit in citations:
+        sec_name = cit["section"].lower()
+        if f"[{sec_name}]" in response_lower or sec_name in response_lower:
+            actual_citations.append(cit)
+            
+    return response_text, actual_citations
 
 
 # Simple Memory state
