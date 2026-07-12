@@ -3,8 +3,10 @@ services:
     name: atmos-support-rag
     env: python
     plan: free
-    buildCommand: pip install -r requirements.txt fastapi uvicorn
+    buildCommand: pip install -r requirements.txt
     startCommand: python app.py
     envVars:
       - key: PORT
         value: 10000
+      - key: GROQ_API_KEY
+        sync: false

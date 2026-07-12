@@ -12,11 +12,7 @@ from langchain_core.embeddings import Embeddings
 
 # CONSTANTS & PATHS
 FAQ_FILE_PATH = "atmos_faq.txt"
-# Obfuscated key to bypass GitHub Push Protection scans
-_k1 = "gsk_kaIwqgwi"
-_k2 = "f8huPUp3xvOBWGdyb3"
-_k3 = "FYcwsBKksdSU2cyq2Eo7QWsrGw"
-DEFAULT_GROQ_KEY = _k1 + _k2 + _k3
+DEFAULT_GROQ_KEY = os.environ.get("GROQ_API_KEY", "")
 
 # Initialize FastAPI App
 app = FastAPI(title="Atmos Support AI")
@@ -303,12 +299,16 @@ async def chat_endpoint(query: ChatQuery):
             ans = "Hello! I am your Atmos support assistant. How can I help you today? I can answer questions about our service tiers, shipping policies, returns, and business hours."
             citations = []
         else:
-            try:
-                ans, citations = get_live_response(DEFAULT_GROQ_KEY, user_msg, session_history[:-1])
-            except Exception as live_err:
+            if DEFAULT_GROQ_KEY:
+                try:
+                    ans, citations = get_live_response(DEFAULT_GROQ_KEY, user_msg, session_history[:-1])
+                except Exception as live_err:
+                    retrieved = local_keyword_search(user_msg, faq_docs, k=2)
+                    ans, citations = generate_mock_response(user_msg, session_history[:-1], retrieved)
+                    ans += "\n\n*(Note: Running in offline fallback mode.)*"
+            else:
                 retrieved = local_keyword_search(user_msg, faq_docs, k=2)
                 ans, citations = generate_mock_response(user_msg, session_history[:-1], retrieved)
-                ans += "\n\n*(Note: Running in offline fallback mode.)*"
     except Exception as e:
         ans = f"Error processing message: {str(e)}"
         citations = []
