@@ -209,7 +209,13 @@ def get_live_response(api_key, query, chat_history):
             role = "User" if msg["role"] == "user" else "Assistant"
             history_str += f"{role}: {msg['content']}\n"
             
-        rewrite_prompt = f"""Analyze the conversation history and the follow-up question. Rewrite the follow-up question as a standalone search query.
+        query_lower = query.lower()
+        pronouns = {"it", "there", "they", "them", "those", "that", "this", "him", "her", "he", "she"}
+        has_pronoun = any(f" {p} " in f" {query_lower} " or query_lower.startswith(f"{p} ") or query_lower.endswith(f" {p}") for p in pronouns)
+        is_short = len(query.split()) <= 3
+        
+        if is_short or has_pronoun:
+            rewrite_prompt = f"""Analyze the conversation history and the follow-up question. Rewrite the follow-up question as a standalone search query.
 If the follow-up question is extremely brief (like "how", "why", "cost", "speed"), expand it fully using the context of what was just being discussed in the history.
 Ensure any pronouns (like "there", "it") are replaced with the correct locations or subjects.
 
@@ -218,17 +224,17 @@ Conversation History:
 Follow-up Question: {query}
 
 Standalone search query (output ONLY the rewritten search query, no extra text):"""
-        
-        try:
-            llm_rewriter = ChatOpenAI(
-                model="llama-3.1-8b-instant",
-                openai_api_key=api_key,
-                openai_api_base="https://api.groq.com/openai/v1",
-                temperature=0.0
-            )
-            search_query = llm_rewriter.invoke(rewrite_prompt).content.strip()
-        except Exception:
-            search_query = query
+            
+            try:
+                llm_rewriter = ChatOpenAI(
+                    model="llama-3.1-8b-instant",
+                    openai_api_key=api_key,
+                    openai_api_base="https://api.groq.com/openai/v1",
+                    temperature=0.0
+                )
+                search_query = llm_rewriter.invoke(rewrite_prompt).content.strip()
+            except Exception:
+                search_query = query
             
     retrieved_docs = vs.similarity_search(search_query, k=2)
     
