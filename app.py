@@ -157,7 +157,12 @@ def generate_mock_response(query, chat_history, retrieved_docs):
             
     return ans, actual_citations
 
-# Custom Embeddings
+# Custom Embeddings with Stop Word Filtering
+STOP_WORDS = {
+    "what", "are", "your", "and", "the", "is", "to", "of", "for", "in", "a", "an", "do", "you", 
+    "i", "how", "why", "we", "our", "us", "they", "them", "their", "this", "that", "these", "those", "have"
+}
+
 class SimpleLocalEmbeddings(Embeddings):
     def __init__(self, vocabulary):
         self.vocabulary = list(vocabulary)
@@ -167,6 +172,8 @@ class SimpleLocalEmbeddings(Embeddings):
         vector = np.zeros(self.dim, dtype=np.float32)
         words = re.findall(r'\w+', text.lower())
         for w in words:
+            if w in STOP_WORDS:
+                continue
             if w in self.vocabulary:
                 idx = self.vocabulary.index(w)
                 vector[idx] += 1.0
@@ -188,7 +195,8 @@ def get_vectorstore():
     if vector_store is None:
         from langchain_community.vectorstores import FAISS
         all_text = " ".join([doc.page_content for doc in faq_docs])
-        vocab = set(re.findall(r'\w+', all_text.lower()))
+        raw_words = re.findall(r'\w+', all_text.lower())
+        vocab = {w for w in raw_words if w not in STOP_WORDS}
         embeddings = SimpleLocalEmbeddings(vocab)
         vector_store = FAISS.from_documents(faq_docs, embeddings)
     return vector_store
