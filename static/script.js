@@ -35,6 +35,8 @@ document.addEventListener("DOMContentLoaded", () => {
         });
     }
 
+    let chatHistory = [];
+
     // Clear chat history
     clearChatBtn.addEventListener("click", async () => {
         if (confirm("Are you sure you want to clear the chat history?")) {
@@ -42,7 +44,9 @@ document.addEventListener("DOMContentLoaded", () => {
                 const response = await fetch("/clear", { method: "POST" });
                 if (response.ok) {
                     messageFeed.innerHTML = "";
-                    appendMessage("assistant", "Hello! Welcome to Atmos Support. I am your virtual customer service assistant. How can I help you today?\n\nYou can click on any of the common topics above, or type your question below. I can answer questions about shipping rates, service tiers, business hours, and return processes.");
+                    const welcomeText = "Hello! Welcome to Atmos Support. I am your virtual customer service assistant. How can I help you today?\n\nYou can click on any of the common topics above, or type your question below. I can answer questions about shipping rates, service tiers, business hours, and return processes.";
+                    chatHistory = [{ role: "assistant", content: welcomeText }];
+                    appendMessage("assistant", welcomeText);
                 }
             } catch (err) {
                 console.error("Error clearing chat:", err);
@@ -81,6 +85,7 @@ document.addEventListener("DOMContentLoaded", () => {
     async function sendUserQuery(query) {
         // 1. Append user bubble
         appendMessage("user", query);
+        chatHistory.push({ role: "user", content: query });
         
         // 2. Append assistant typing indicator
         const typingIndicator = appendTypingIndicator();
@@ -90,7 +95,7 @@ document.addEventListener("DOMContentLoaded", () => {
             const response = await fetch("/chat", {
                 method: "POST",
                 headers: { "Content-Type": "application/json" },
-                body: JSON.stringify({ message: query })
+                body: JSON.stringify({ message: query, history: chatHistory })
             });
 
             // Remove typing indicator
@@ -98,6 +103,7 @@ document.addEventListener("DOMContentLoaded", () => {
 
             if (response.ok) {
                 const data = await response.json();
+                chatHistory.push({ role: "assistant", content: data.answer });
                 appendMessage("assistant", data.answer, data.citations);
             } else {
                 appendMessage("assistant", "Sorry, I encountered an issue processing that request. Please try again.");
@@ -195,6 +201,8 @@ document.addEventListener("DOMContentLoaded", () => {
 
     // Initial load message if feed is empty
     if (messageFeed.children.length === 0) {
-        appendMessage("assistant", "Hello! Welcome to Atmos Support. I am your virtual customer service assistant. How can I help you today?\n\nYou can click on any of the common topics above, or type your question below. I can answer questions about shipping rates, service tiers, business hours, and return processes.");
+        const welcomeText = "Hello! Welcome to Atmos Support. I am your virtual customer service assistant. How can I help you today?\n\nYou can click on any of the common topics above, or type your question below. I can answer questions about shipping rates, service tiers, business hours, and return processes.";
+        chatHistory.push({ role: "assistant", content: welcomeText });
+        appendMessage("assistant", welcomeText);
     }
 });

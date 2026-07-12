@@ -304,6 +304,7 @@ session_history = [
 # API Schemas
 class ChatQuery(BaseModel):
     message: str
+    history: list = []
 
 # ROUTES
 @app.get("/", response_class=FileResponse)
@@ -312,11 +313,8 @@ async def get_index():
 
 @app.post("/chat")
 async def chat_endpoint(query: ChatQuery):
-    global session_history
     user_msg = query.message
-    
-    # Append user question to history
-    session_history.append({"role": "user", "content": user_msg})
+    client_history = query.history
     
     # Process
     try:
@@ -330,32 +328,22 @@ async def chat_endpoint(query: ChatQuery):
         else:
             if DEFAULT_GROQ_KEY:
                 try:
-                    ans, citations = get_live_response(DEFAULT_GROQ_KEY, user_msg, session_history[:-1])
+                    ans, citations = get_live_response(DEFAULT_GROQ_KEY, user_msg, client_history)
                 except Exception as live_err:
                     retrieved = local_keyword_search(user_msg, faq_docs, k=2)
-                    ans, citations = generate_mock_response(user_msg, session_history[:-1], retrieved)
+                    ans, citations = generate_mock_response(user_msg, client_history, retrieved)
                     ans += "\n\n*(Note: Running in offline fallback mode.)*"
             else:
                 retrieved = local_keyword_search(user_msg, faq_docs, k=2)
-                ans, citations = generate_mock_response(user_msg, session_history[:-1], retrieved)
+                ans, citations = generate_mock_response(user_msg, client_history, retrieved)
     except Exception as e:
         ans = f"Error processing message: {str(e)}"
         citations = []
         
-    # Append assistant reply to history
-    session_history.append({"role": "assistant", "content": ans, "citations": citations})
     return JSONResponse({"answer": ans, "citations": citations})
 
 @app.post("/clear")
 async def clear_endpoint():
-    global session_history
-    session_history = [
-        {
-            "role": "assistant",
-            "content": "Hello! Welcome to Atmos Support. I am your virtual customer service assistant. How can I help you today?\n\nYou can click on any of the common topics above, or type your question below. I can answer questions about shipping rates, service tiers, business hours, and return processes.",
-            "citations": []
-        }
-    ]
     return JSONResponse({"status": "cleared"})
 
 if __name__ == "__main__":
