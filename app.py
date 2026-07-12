@@ -90,7 +90,11 @@ def generate_mock_response(query, chat_history, retrieved_docs):
                 break
 
     resolved_country = None
-    if "there" in query_lower or "cost to ship" in query_lower or "shipping rate" in query_lower:
+    # Check if the query is a continuation or brief follow-up
+    continuation_keywords = {"how", "why", "what", "cost", "price", "rate", "there", "speed", "time", "days", "ship", "deliver"}
+    is_continuation = any(w in query_lower for w in continuation_keywords) or len(query_lower.split()) <= 2
+    
+    if is_continuation:
         resolved_country = prev_country
 
     citations = []
@@ -197,14 +201,15 @@ def get_live_response(api_key, query, chat_history):
             role = "User" if msg["role"] == "user" else "Assistant"
             history_str += f"{role}: {msg['content']}\n"
             
-        rewrite_prompt = f"""Given the following conversation history and a follow-up question, rewrite the follow-up question as a standalone search query.
-Ensure that it resolves any pronouns (like "there", "it", "they") to refer to the correct subject from history.
+        rewrite_prompt = f"""Analyze the conversation history and the follow-up question. Rewrite the follow-up question as a standalone search query.
+If the follow-up question is extremely brief (like "how", "why", "cost", "speed"), expand it fully using the context of what was just being discussed in the history.
+Ensure any pronouns (like "there", "it") are replaced with the correct locations or subjects.
 
 Conversation History:
 {history_str}
 Follow-up Question: {query}
 
-Standalone search query (output ONLY the query, no extra text):"""
+Standalone search query (output ONLY the rewritten search query, no extra text):"""
         
         try:
             llm_rewriter = ChatOpenAI(
